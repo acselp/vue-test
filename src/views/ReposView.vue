@@ -24,7 +24,6 @@ onMounted(async () => {
         <article class="message is-dark mt-3" v-if="!repositoryStore.$state.isReposSet">
           <div class="message-header">
             <p>Ooopsi...</p>
-            <button class="delete" aria-label="delete"></button>
           </div>
 
           <div class="message-body">

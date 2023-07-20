@@ -21,8 +21,9 @@ export const useRepositoryStore = defineStore('repository', () => {
             .then((data) => {
                 repos.value = data
                 $resetError();
+                console.log(data);
                 isLoading.value = false;
-                isReposSet.value = true;
+                isReposSet.value =  repos.value.length !== 0 ;
             })
             .catch((error) => {
                 $resetRepos();
