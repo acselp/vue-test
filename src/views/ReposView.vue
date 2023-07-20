@@ -1,25 +1,37 @@
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
+
+import Repository from "@/components/Repository.vue";
+import {useRepositoryStore} from "@/stores/repository";
+import {onMounted} from "vue";
 import {useUserStore} from "@/stores/user";
-import UserCard from "@/components/UserCard.vue";
-import Error from "@/components/Error.vue";
-import {useNotificationStore} from "@/stores/notification";
 
+const repositoryStore = useRepositoryStore();
 const userStore = useUserStore();
-const notificationStore = useNotificationStore();
 
-const username = ref("");
-
-async function setUser(username: string) {
-  await userStore.$setUser(username);
-}
+onMounted(async () => {
+  await repositoryStore.$setRepos(userStore.$state.user.login);
+})
 
 </script>
 
 <template>
   <div class="home-main-container">
-    <div class="repositories-container is-center is-justify-content-center">
+    <div class="repositories-container">
+      <div class="repos">
+        <router-link class="is-info button" to="/"> &lt;- Back to home </router-link>
+        <Repository v-for="repo in repositoryStore.$state.repos" :link="repo.html_url" :name="repo.name" :stars="repo.stargazers_count" />
 
+        <article class="message is-dark mt-3" v-if="!repositoryStore.$state.isReposSet">
+          <div class="message-header">
+            <p>Ooopsi...</p>
+            <button class="delete" aria-label="delete"></button>
+          </div>
+
+          <div class="message-body">
+            This account does not have any repositories
+          </div>
+        </article>
+      </div>
     </div>
   </div>
 </template>

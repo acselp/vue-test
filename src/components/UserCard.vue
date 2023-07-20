@@ -3,7 +3,8 @@ const props = defineProps({
   username: String,
   profileImageUrl: String,
   bio: String,
-  followers: String
+  followers: String,
+  linkToProfile: String
 })
 
 </script>
@@ -19,6 +20,9 @@ const props = defineProps({
         <div class="is-flex is-flex-direction-column">
           <span>Bio: {{bio}}</span>
           <span>Followers: {{followers}}</span>
+        </div>
+        <div>
+          <a :href="linkToProfile">Visit profile</a>
         </div>
         <router-link to="/repos">Repositories</router-link>
 

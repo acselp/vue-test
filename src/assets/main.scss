@@ -1,6 +1,7 @@
 .home-main-container {
   background-color: #0D1117;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
 
   .label {
     color: #E6EDF3;
@@ -35,6 +36,18 @@
 }
 
 .repositories-container {
-  background-color: #fff;
+  display: flex;
+  justify-content: center;
+}
+
+.repos {
   width: 50%;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 0 0 10px 10px;
+}
+
+.repos-card {
+  background-color: #202526;
+  color: darkgrey;
 }

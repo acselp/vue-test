@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
+import {ref} from "vue";
   import {useUserStore} from "@/stores/user";
   import UserCard from "@/components/UserCard.vue";
   import Error from "@/components/Error.vue";
-  import {useNotificationStore} from "@/stores/notification";
 
   const userStore = useUserStore();
-  const notificationStore = useNotificationStore();
-
   const username = ref("");
 
   async function setUser(username: string) {
@@ -36,13 +33,15 @@ import {onMounted, ref} from "vue";
           :username="userStore.$state.user.login"
           :profileImageUrl="userStore.$state.user.avatar_url"
           :bio="userStore.$state.user.bio"
-          :followers="userStore.$state.user.followers" />
+          :followers="userStore.$state.user.followers"
+          :link-to-profile="userStore.$state.user.html_url"
+      />
 
       <div class="loader-div" v-if="userStore.$state.isLoading">
         <progress class="progress is-small is-primary" max="100">15%</progress>
       </div>
 
-      <Error v-if="notificationStore.$state.showError" message="User not found" />
+      <Error v-if="userStore.$state.showError" message="User not found" />
 
     </div>
 
