@@ -1,9 +1,10 @@
-import './assets/main.css'
+import './../node_modules/Bulma/CSS/bulma.css';
+import '@/assets/main.scss';
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
-import App from './App.vue'
+import App from '@/App.vue'
 import router from './router'
 
 const app = createApp(App)

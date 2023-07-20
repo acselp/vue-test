@@ -1,0 +1,40 @@
+.home-main-container {
+  background-color: #0D1117;
+  height: 100vh;
+
+  .label {
+    color: #E6EDF3;
+  }
+}
+
+.form-container {
+  width: 40%;
+  margin: auto;
+  padding-top: 50px;
+}
+
+.user-card {
+  margin-top: 20px;
+}
+
+.loader-div {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.error-container {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+}
+
+.custom-notification {
+  margin-top: 10px;
+}
+
+.repositories-container {
+  background-color: #fff;
+  width: 50%;
+}
