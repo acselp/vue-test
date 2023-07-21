@@ -6,6 +6,7 @@ import {RepositoryMapper} from "@/shared/mappers/RepositoryMapper";
 
 export const useRepositoryStore = defineStore('repository', () => {
     const repos = ref([] as RepositoryDto[]);
+    const repo = ref({} as RepositoryDto);
     const isReposSet = ref(false);
     const isLoading = ref(false);
     const showError = ref(false)
@@ -22,13 +23,29 @@ export const useRepositoryStore = defineStore('repository', () => {
     }
     async function $setRepos(username: string) {
         isLoading.value = true;
-        githubService.getRepository(username)
+        githubService.getRepositoriesByUsername(username)
             .then((data) => {
-                repos.value = repositoryMapper.toDto(data);
+                repos.value = repositoryMapper.toDtos(data);
 
                 $resetError();
                 isLoading.value = false;
                 isReposSet.value = repos.value.length !== 0;
+            })
+            .catch((error) => {
+                $resetRepos();
+                $setError();
+            })
+    }
+
+    async function $setRepo(username: string, repoName: string) {
+        isLoading.value = true;
+        githubService.getRepositoryByName(username, repoName)
+            .then((data) => {
+                repo.value = repositoryMapper.toDto(data);
+
+                $resetError();
+                isLoading.value = false;
+                isReposSet.value = true;
             })
             .catch((error) => {
                 $resetRepos();
@@ -42,5 +59,5 @@ export const useRepositoryStore = defineStore('repository', () => {
         repos.value = [];
     }
 
-    return { repos, $setRepos, isReposSet, isLoading, $resetRepos };
+    return { repos, $setRepos, isReposSet, isLoading, $resetRepos, $setRepo };
 })

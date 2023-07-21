@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
-import ReposView from "@/views/ReposView.vue";
+import HomeView from '@/views/Home/HomeView.vue'
+import RepositoryListView from "@/views/Repository/RepositoryListView.vue";
+import RepositoryDeatilView from "@/views/Repository/RepositoryDeatilView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,7 +14,12 @@ const router = createRouter({
     {
       path: '/repos',
       name: 'repos',
-      component: ReposView
+      component: RepositoryListView
+    },
+    {
+      path: '/repos/:username/:repoName',
+      name: 'reposDetail',
+      component: RepositoryDeatilView
     }
   ]
 })

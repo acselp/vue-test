@@ -1,5 +1,10 @@
 <script setup>
 
+import {onMounted, ref} from "vue";
+
+
+const user = ref({});
+
 const props = defineProps({
   name: String,
   link: String,
@@ -19,7 +24,7 @@ const props = defineProps({
       Stars: {{stars}}
     </div>
     <div class="repo-name">
-      Link: <a :href="link">{{link}}</a>
+      Link: <a :href="link">{{name}}</a>
     </div>
   </div>
 

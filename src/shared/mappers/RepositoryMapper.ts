@@ -2,7 +2,7 @@ import type {RepositoryModel} from "@/shared/models/RepositoryModel";
 import type {RepositoryDto} from "@/shared/dto/RepositoryDto";
 
 export class RepositoryMapper {
-    toDto(models: RepositoryModel[]) {
+    toDtos(models: RepositoryModel[]) {
         let dtos = [] as RepositoryDto[];
 
         models.forEach((item) => {
@@ -14,5 +14,13 @@ export class RepositoryMapper {
         })
 
         return dtos;
+    }
+
+    toDto(model: RepositoryModel) {
+        return ({
+            name: model.name,
+            link: model.html_url,
+            starsCount: model.stargazers_count
+        } as RepositoryDto)
     }
 }

@@ -21,7 +21,7 @@ async function setUser(username: string) {
 
 <template>
 
-  <div class="home-main-container">
+  <div class="main-container">
     <div class="form-container is-center is-justify-content-center">
       <div class="is-flex is-align-items-flex-end">
         <div class="field">

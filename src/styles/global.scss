@@ -1,5 +1,6 @@
 @import "@/styles/views/home";
-@import "@/styles/views/repos";
+@import "@/styles/views/repositoryList";
+@import "@/styles/views/repositoryDetail";
 @import "@/styles/components/repository";
 @import "@/styles/components/reposSkeleton";
 @import "@/styles/components/userCard";
@@ -8,7 +9,7 @@ html, body, #app {
   height: 100%;
 }
 
-.home-main-container {
+.main-container {
   background-color: #0D1117;
   min-height: 100%;
 

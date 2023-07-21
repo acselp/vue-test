@@ -17,9 +17,14 @@ export class GithubService {
         return data as UserModel
     }
 
-    async getRepository(username: string) {
+    async getRepositoriesByUsername(username: string) {
         const { data } = await this.axiosClient.get(this.apiUrlGetRepos.replace(this.usernamePlaceholder, username));
 
         return data as RepositoryModel[]
+    }
+    async getRepositoryByName(username: string, repositoryName: string) {
+        const { data } = await this.axiosClient.get(`${this.apiUrlGetUser}/${username}/${repositoryName}`);
+
+        return data as RepositoryModel
     }
 }

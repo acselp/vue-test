@@ -13,7 +13,7 @@ repositoryStore.$setRepos(userStore.$state.user.username);
 </script>
 
 <template>
-  <div class="home-main-container">
+  <div class="main-container">
     <div class="repositories-container">
       <div class="repos">
         <router-link class="is-info button" to="/"> <i class="fa-solid fa-arrow-left">&nbsp;</i> Back to home </router-link>
