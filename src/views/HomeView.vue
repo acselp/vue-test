@@ -3,12 +3,15 @@ import {ref} from "vue";
 import {useUserStore} from "@/stores/user";
 import UserCard from "@/components/UserCard.vue";
 import Error from "@/components/Error.vue";
+import {useRepositoryStore} from "@/stores/repository";
 
 const userStore = useUserStore();
+const repositoryStore = useRepositoryStore();
 
 const username = ref("");
 
 async function setUser(username: string) {
+  await repositoryStore.$resetRepos();
   await userStore.$setUser(username);
 }
 
