@@ -16,15 +16,14 @@ export const useRepositoryStore = defineStore('repository', () => {
     function $resetError () {
         showError.value = false;
     }
-    function $setRepos(username: string) {
+    async function $setRepos(username: string) {
         isLoading.value = true;
         getGithubUserReposDataByUsername(username)
             .then((data) => {
                 repos.value = data
                 $resetError();
-                console.log(data);
+                isReposSet.value = repos.value.length !== 0;
                 isLoading.value = false;
-                isReposSet.value =  repos.value.length !== 0 ;
             })
             .catch((error) => {
                 $resetRepos();
@@ -37,5 +36,5 @@ export const useRepositoryStore = defineStore('repository', () => {
         isReposSet.value = false;
     }
 
-    return { repos, $setRepos, isReposSet };
+    return { repos, $setRepos, isReposSet, isLoading };
 })
