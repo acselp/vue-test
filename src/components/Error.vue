@@ -9,13 +9,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="notification is-danger custom-notification">
+  <p class="notification is-danger mt-3">
     {{message}}
-  </div>
+  </p>
 </template>
-
-<style>
-.custom-notification {
-  margin-top: 10px;
-}
-</style>

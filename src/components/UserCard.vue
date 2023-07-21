@@ -32,13 +32,3 @@ const props = defineProps({
 
   </div>
 </template>
-
-<style>
-.user-card {
-  color: #E6EDF3;
-}
-
-.user-card {
-  margin-top: 20px;
-}
-</style>

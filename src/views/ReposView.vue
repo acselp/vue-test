@@ -34,17 +34,3 @@ repositoryStore.$setRepos(userStore.$state.user.login);
     </div>
   </div>
 </template>
-
-<style>
-.repositories-container {
-  display: flex;
-  justify-content: center;
-}
-
-.repos {
-  width: 50%;
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 0 0 10px 10px;
-}
-</style>
