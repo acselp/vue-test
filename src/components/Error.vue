@@ -1,7 +1,5 @@
 <script setup>
 
-import {onMounted, ref} from "vue";
-
 const props = defineProps({
   message: String
 })
@@ -9,7 +7,9 @@ const props = defineProps({
 </script>
 
 <template>
+
   <p class="notification is-danger mt-3">
     {{message}}
   </p>
+
 </template>

@@ -1,7 +1,3 @@
-<script setup>
-
-</script>
-
 <template>
 
   <div v-for="n in 5" class="skeleton repos-skeleton">

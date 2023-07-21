@@ -33,4 +33,5 @@ repositoryStore.$setRepos(userStore.$state.user.username);
       </div>
     </div>
   </div>
+
 </template>

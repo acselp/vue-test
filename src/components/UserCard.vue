@@ -1,4 +1,5 @@
 <script setup>
+
 const props = defineProps({
   username: String,
   profileImageUrl: String,
@@ -10,6 +11,7 @@ const props = defineProps({
 </script>
 
 <template>
+
   <div class="card user-card">
     <div class="card-content">
       <div class="content">
@@ -29,6 +31,6 @@ const props = defineProps({
         </div>
       </div>
     </div>
-
   </div>
+
 </template>

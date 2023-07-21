@@ -18,8 +18,7 @@ export class GithubService {
     }
 
     async getRepository(username: string) {
-        const apiUrl = this.apiUrlGetRepos.replace(this.usernamePlaceholder, username);
-        const { data } = await this.axiosClient.get(apiUrl);
+        const { data } = await this.axiosClient.get(this.apiUrlGetRepos.replace(this.usernamePlaceholder, username));
 
         return data as RepositoryModel[]
     }

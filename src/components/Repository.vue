@@ -7,10 +7,10 @@ const props = defineProps({
   owner: String
 })
 
-
 </script>
 
 <template>
+
   <div class="repos-card card p-4 mt-4">
     <div class="repo-name">
       Repository name: {{name}}
@@ -22,4 +22,5 @@ const props = defineProps({
       Link: <a :href="link">{{link}}</a>
     </div>
   </div>
+
 </template>
