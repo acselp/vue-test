@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref} from "vue";
+import {ref} from "vue";
 import {useUserStore} from "@/stores/user";
 import UserCard from "@/components/UserCard.vue";
 import Error from "@/components/Error.vue";
@@ -51,7 +51,7 @@ async function setUser(username: string) {
         <progress class="progress is-small is-primary" max="100">15%</progress>
       </div>
 
-      <Error v-if="userStore.$state.showError" message="User not found" />
+      <Error v-if="userStore.$state.showError" :message="userStore.$state.errorMessage" />
 
     </div>
 

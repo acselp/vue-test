@@ -22,7 +22,6 @@
 </template>
 
 <style>
-
 .skeleton {
   .message-header {
     background-color: #e2e2e2;

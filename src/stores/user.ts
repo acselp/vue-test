@@ -7,6 +7,10 @@ export const useUserStore = defineStore('user', () => {
     const isUserSet = ref(false)
     const isLoading = ref(false)
     const showError = ref(false)
+    const errorMessage = ref("")
+
+    const UserNotFoundMessage = "User not found";
+    const ApiRateLimitExcededMessage = "API rate limit exceeded";
 
     function $setError () {
         showError.value = true;
@@ -19,6 +23,7 @@ export const useUserStore = defineStore('user', () => {
 
     async function $setUser(username: string) {
         isLoading.value = true;
+
         getGithubUserDataByUsername(username)
             .then((data) => {
                 user.value = data
@@ -27,8 +32,15 @@ export const useUserStore = defineStore('user', () => {
                 isUserSet.value = true;
             })
             .catch((err) => {
-                $resetUser()
+
+                if (err.response.status === 403 && err.code === 'ERR_BAD_REQUEST')
+                    errorMessage.value = ApiRateLimitExcededMessage;
+
+                if (err.response.status === 404 && err.code === 'ERR_BAD_REQUEST')
+                    errorMessage.value = UserNotFoundMessage;
+
                 $setError();
+                $resetUser();
             })
     }
 
@@ -37,5 +49,5 @@ export const useUserStore = defineStore('user', () => {
         isUserSet.value = false;
     }
 
-    return { user, $setUser, isUserSet, isLoading, showError, $resetError }
+    return { user, $setUser, isUserSet, isLoading, showError, $resetError, errorMessage }
 })
