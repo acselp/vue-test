@@ -1,15 +1,19 @@
 <script setup lang="ts">
-import {ref} from "vue";
-  import {useUserStore} from "@/stores/user";
-  import UserCard from "@/components/UserCard.vue";
-  import Error from "@/components/Error.vue";
+import { ref} from "vue";
+import {useUserStore} from "@/stores/user";
+import UserCard from "@/components/UserCard.vue";
+import Error from "@/components/Error.vue";
+import {useRepositoryStore} from "@/stores/repository";
 
-  const userStore = useUserStore();
-  const username = ref("");
+const userStore = useUserStore();
+const repositoryStore = useRepositoryStore();
 
-  async function setUser(username: string) {
-    await userStore.$setUser(username);
-  }
+const username = ref("");
+
+async function setUser(username: string) {
+  await userStore.$setUser(username);
+  await repositoryStore.$setRepos(username);
+}
 
 </script>
 
@@ -19,8 +23,17 @@ import {ref} from "vue";
 
       <div class="field">
         <label class="label">Github Username</label>
-        <div class="control">
+        <div class="control has-icons-right">
           <input class="input" v-on:keyup.enter="setUser(username.valueOf())" v-model="username" type="text" placeholder="ex. mario123">
+          <span class="icon is-small is-left" v-if="userStore.$state.isLoading">
+              <i class="fa fa-refresh fa-spin"></i>
+          </span>
+          <span class="icon is-large is-left" v-if="userStore.$state.isUserSet && !userStore.$state.isLoading">
+              <i class="fa fa-check"></i>
+          </span>
+          <span class="icon is-large is-left" v-if="userStore.$state.showError && !userStore.$state.isLoading">
+              <i class="fa fa-circle-exclamation"></i>
+          </span>
         </div>
       </div>
 

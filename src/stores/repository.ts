@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import {ref} from "vue";
+import { ref} from "vue";
 import {getGithubUserReposDataByUsername} from "@/shared/services/github-service";
 
 export const useRepositoryStore = defineStore('repository', () => {
@@ -10,6 +10,7 @@ export const useRepositoryStore = defineStore('repository', () => {
 
     function $setError () {
         showError.value = true;
+        setTimeout(() => showError.value = false, 1000)
     }
 
     function $resetError () {

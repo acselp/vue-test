@@ -2,15 +2,8 @@
 
 import Repository from "@/components/Repository.vue";
 import {useRepositoryStore} from "@/stores/repository";
-import {onMounted} from "vue";
-import {useUserStore} from "@/stores/user";
 
 const repositoryStore = useRepositoryStore();
-const userStore = useUserStore();
-
-onMounted(async () => {
-  await repositoryStore.$setRepos(userStore.$state.user.login);
-})
 
 </script>
 
@@ -27,7 +20,7 @@ onMounted(async () => {
           </div>
 
           <div class="message-body">
-            This account does not have any repositories
+            This account does not have any public repositories
           </div>
         </article>
       </div>

@@ -17,15 +17,16 @@ const props = defineProps({
         <figure class="image is-128x128">
           <img class="is-rounded" v-bind:src="profileImageUrl">
         </figure>
-        <div class="is-flex is-flex-direction-column">
-          <span>Bio: {{bio}}</span>
-          <span>Followers: {{followers}}</span>
+        <div class="user-card card card-content has-background-grey-darker">
+          <div class="is-flex is-flex-direction-column">
+            <span>Bio: {{bio}}</span>
+            <span>Followers: {{followers}}</span>
+          </div>
+          <div>
+            <a :href="linkToProfile">Visit profile</a>
+          </div>
+          <router-link to="/repos">Repositories</router-link>
         </div>
-        <div>
-          <a :href="linkToProfile">Visit profile</a>
-        </div>
-        <router-link to="/repos">Repositories</router-link>
-
       </div>
     </div>
 

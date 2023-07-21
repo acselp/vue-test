@@ -10,6 +10,7 @@ export const useUserStore = defineStore('user', () => {
 
     function $setError () {
         showError.value = true;
+        setTimeout(() => showError.value = false, 3000)
     }
 
     function $resetError () {
