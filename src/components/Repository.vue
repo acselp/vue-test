@@ -23,3 +23,10 @@ const props = defineProps({
     </div>
   </div>
 </template>
+
+<style>
+.repos-card {
+  background-color: #202526;
+  color: darkgrey;
+}
+</style>

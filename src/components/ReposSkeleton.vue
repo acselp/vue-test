@@ -20,3 +20,22 @@
   </div>
 
 </template>
+
+<style>
+
+.skeleton {
+  .message-header {
+    background-color: #e2e2e2;
+    animation: loading .7s infinite alternate;
+  }
+}
+
+@keyframes loading {
+  from {background-color:#ccc;}
+  to {background-color: #0D111799;}
+}
+
+.repos-skeleton {
+  margin-top: 30px;
+}
+</style>

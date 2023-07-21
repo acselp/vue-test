@@ -57,3 +57,18 @@ async function setUser(username: string) {
 
   </div>
 </template>
+
+<style>
+.loader-div {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.form-container {
+  width: 40%;
+  margin: auto;
+  padding-top: 50px;
+}
+</style>

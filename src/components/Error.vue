@@ -13,3 +13,9 @@ const props = defineProps({
     {{message}}
   </div>
 </template>
+
+<style>
+.custom-notification {
+  margin-top: 10px;
+}
+</style>

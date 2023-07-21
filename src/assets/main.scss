@@ -8,67 +8,13 @@
   }
 }
 
-.form-container {
-  width: 40%;
-  margin: auto;
-  padding-top: 50px;
-}
-
-.user-card {
-  margin-top: 20px;
-}
-
-.loader-div {
-  position: absolute;
-  width: 100%;
-  top: 0;
-  left: 0;
-}
-
-.error-container {
-  position: absolute;
-  top: 50px;
-  right: 50px;
-}
-
-.custom-notification {
-  margin-top: 10px;
-}
-
-.repositories-container {
-  display: flex;
-  justify-content: center;
-}
-
-.repos {
-  width: 50%;
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 0 0 10px 10px;
-}
-
-.repos-card {
-  background-color: #202526;
-  color: darkgrey;
-}
-
-.user-card {
-  color: #E6EDF3;
-}
 
 
-.skeleton {
-  .message-header {
-    background-color: #e2e2e2;
-    animation: loading .7s infinite alternate;
-  }
-}
 
-@keyframes loading {
-  from {background-color:#ccc;}
-  to {background-color: #0D111799;}
-}
 
-.repos-skeleton {
-  margin-top: 30px;
-}
+
+
+
+
+
+
