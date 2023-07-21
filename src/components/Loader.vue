@@ -1,7 +1,7 @@
 <script setup>
 
 const props = defineProps({
-  isActive: false
+  isActive: true
 })
 
 </script>

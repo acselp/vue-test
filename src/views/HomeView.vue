@@ -48,11 +48,7 @@ async function setUser(username: string) {
 
       <UserCard
           v-if="userStore.$state.isUserSet"
-          :username="userStore.$state.user.username"
-          :profileImageUrl="userStore.$state.user.avatarUrl"
-          :bio="userStore.$state.user.bio"
-          :followers="userStore.$state.user.followersCount"
-          :link-to-profile="userStore.$state.user.linkToProfile"
+          :user="userStore.$state.user"
       />
 
       <Loader :is-active="userStore.$state.isLoading" />
