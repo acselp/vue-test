@@ -21,24 +21,32 @@ async function setUser(username: string) {
   <div class="home-main-container">
     <div class="form-container is-center is-justify-content-center">
 
-      <div class="field">
-        <label class="label">Github Username</label>
-        <div class="control has-icons-right">
-          <input class="input" v-on:keyup.enter="setUser(username.valueOf())" v-model="username" type="text" placeholder="ex. mario123">
-          <span class="icon is-small is-left" v-if="userStore.$state.isLoading">
-              <i class="fa fa-refresh fa-spin"></i>
-          </span>
-          <span class="icon is-large is-left" v-if="userStore.$state.isUserSet && !userStore.$state.isLoading">
-              <i class="fa fa-check"></i>
-          </span>
-          <span class="icon is-large is-left" v-if="userStore.$state.showError && !userStore.$state.isLoading">
-              <i class="fa fa-circle-exclamation"></i>
-          </span>
-        </div>
-      </div>
+      <div class="is-flex is-align-items-flex-end">
+        <div class="field">
+          <label class="label">Github Username</label>
+          <div class="control">
+            <div class="is-flex">
+              <input class="input is-fullwidth" v-on:keyup.enter="setUser(username.valueOf())" v-model="username" type="text" placeholder="ex. mario123">
 
-      <div class="control">
-        <button class="button is-link" @click="setUser(username.valueOf())">Search</button>
+              <span class="icon is-large has-text-light" v-if="userStore.$state.isLoading">
+                <i class="fa fa-refresh fa-spin"></i>
+              </span>
+
+              <span class="icon is-large has-text-success" v-if="userStore.$state.isUserSet && !userStore.$state.isLoading">
+                <i class="fa fa-check"></i>
+              </span>
+
+              <span class="icon is-large has-text-danger" v-if="userStore.$state.showError && !userStore.$state.isLoading">
+                <i class="fa fa-circle-exclamation"></i>
+              </span>
+              <div class="control ml-3">
+                <button class="button is-link" @click="setUser(username.valueOf())">Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
       </div>
 
       <UserCard
