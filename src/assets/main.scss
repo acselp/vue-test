@@ -1,7 +1,10 @@
+html, body, #app {
+  height: 100%;
+}
+
 .home-main-container {
   background-color: #0D1117;
-  height: 100%;
-  min-height: 100vh;
+  min-height: 100%;
 
   .label {
     color: #E6EDF3;
