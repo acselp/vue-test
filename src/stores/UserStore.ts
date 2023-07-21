@@ -1,13 +1,18 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import {getGithubUserDataByUsername} from "@/shared/services/github-service";
+import {GithubService} from "@/shared/services/GithubService";
+import type {UserDto} from "@/shared/dto/UserDto";
+import {UserMapper} from "@/shared/mappers/UserMapper";
 
 export const useUserStore = defineStore('user', () => {
-    const user = ref({})
+    const user = ref({} as UserDto)
     const isUserSet = ref(false)
     const isLoading = ref(false)
     const showError = ref(false)
     const errorMessage = ref("")
+
+    const userMapper = new UserMapper();
+    const githubService = new GithubService();
 
     const UserNotFoundMessage = "User not found";
     const ApiRateLimitExcededMessage = "API rate limit exceeded";
@@ -24,9 +29,10 @@ export const useUserStore = defineStore('user', () => {
     async function $setUser(username: string) {
         isLoading.value = true;
 
-        getGithubUserDataByUsername(username)
+        githubService.getUser(username)
             .then((data) => {
-                user.value = data
+                user.value = userMapper.toDto(data);
+
                 $resetError();
                 isLoading.value = false;
                 isUserSet.value = true;
@@ -49,5 +55,5 @@ export const useUserStore = defineStore('user', () => {
         isUserSet.value = false;
     }
 
-    return { user, $setUser, isUserSet, isLoading, showError, $resetError, errorMessage }
+    return { user, $setUser, isUserSet, isLoading, showError, errorMessage }
 })

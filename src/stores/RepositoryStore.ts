@@ -1,12 +1,16 @@
 import { defineStore } from 'pinia'
 import { ref} from "vue";
-import {getGithubUserReposDataByUsername} from "@/shared/services/github-service";
+import {GithubService} from "@/shared/services/GithubService";
+import type {RepositoryDto} from "@/shared/dto/RepositoryDto";
+import {RepositoryMapper} from "@/shared/mappers/RepositoryMapper";
 
 export const useRepositoryStore = defineStore('repository', () => {
-    const repos = ref([]);
+    const repos = ref([] as RepositoryDto[]);
     const isReposSet = ref(false);
     const isLoading = ref(false);
     const showError = ref(false)
+    const githubService = new GithubService();
+    const repositoryMapper = new RepositoryMapper();
 
     function $setError () {
         showError.value = true;
@@ -18,9 +22,10 @@ export const useRepositoryStore = defineStore('repository', () => {
     }
     async function $setRepos(username: string) {
         isLoading.value = true;
-        getGithubUserReposDataByUsername(username)
+        githubService.getRepository(username)
             .then((data) => {
-                repos.value = data
+                repos.value = repositoryMapper.toDto(data);
+
                 $resetError();
                 isLoading.value = false;
                 isReposSet.value = repos.value.length !== 0;

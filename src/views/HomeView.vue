@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import {ref} from "vue";
-import {useUserStore} from "@/stores/user";
+import {useUserStore} from "@/stores/UserStore";
 import UserCard from "@/components/UserCard.vue";
 import Error from "@/components/Error.vue";
-import {useRepositoryStore} from "@/stores/repository";
+import {useRepositoryStore} from "@/stores/RepositoryStore";
 
 const userStore = useUserStore();
 const repositoryStore = useRepositoryStore();
@@ -51,11 +51,11 @@ async function setUser(username: string) {
 
       <UserCard
           v-if="userStore.$state.isUserSet"
-          :username="userStore.$state.user.login"
-          :profileImageUrl="userStore.$state.user.avatar_url"
+          :username="userStore.$state.user.username"
+          :profileImageUrl="userStore.$state.user.avatarUrl"
           :bio="userStore.$state.user.bio"
-          :followers="userStore.$state.user.followers"
-          :link-to-profile="userStore.$state.user.html_url"
+          :followers="userStore.$state.user.followersCount"
+          :link-to-profile="userStore.$state.user.linkToProfile"
       />
 
       <div class="loader-div" v-if="userStore.$state.isLoading">

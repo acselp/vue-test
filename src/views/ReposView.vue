@@ -1,14 +1,14 @@
 <script setup lang="ts">
 
 import Repository from "@/components/Repository.vue";
-import {useRepositoryStore} from "@/stores/repository";
+import {useRepositoryStore} from "@/stores/RepositoryStore";
 import ReposSkeleton from "@/components/ReposSkeleton.vue";
-import {useUserStore} from "@/stores/user";
+import {useUserStore} from "@/stores/UserStore";
 
 const repositoryStore = useRepositoryStore();
 const userStore = useUserStore();
 
-repositoryStore.$setRepos(userStore.$state.user.login);
+repositoryStore.$setRepos(userStore.$state.user.username);
 
 </script>
 
@@ -17,7 +17,7 @@ repositoryStore.$setRepos(userStore.$state.user.login);
     <div class="repositories-container">
       <div class="repos">
         <router-link class="is-info button" to="/"> <i class="fa-solid fa-arrow-left">&nbsp;</i> Back to home </router-link>
-        <Repository v-if="repositoryStore.$state.isReposSet" v-for="repo in repositoryStore.$state.repos" :link="repo.html_url" :name="repo.name" :stars="repo.stargazers_count" />
+        <Repository v-if="repositoryStore.$state.isReposSet" v-for="repo in repositoryStore.$state.repos" :link="repo.link" :name="repo.name" :stars="repo.starsCount" />
 
         <ReposSkeleton v-if="repositoryStore.$state.isLoading && !repositoryStore.$state.isReposSet" />
 
