@@ -39,7 +39,7 @@ async function setUser(username: string) {
                 <i class="fa fa-circle-exclamation"></i>
               </span>
               <div class="control ml-3">
-                <button class="button is-link" @click="setUser(username.valueOf())">Search</button>
+                <button class="button is-link" @click="setUser(username)">Search</button>
               </div>
             </div>
           </div>

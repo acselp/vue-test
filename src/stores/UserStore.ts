@@ -5,21 +5,21 @@ import type {UserDto} from "@/shared/dto/UserDto";
 import {UserMapper} from "@/shared/mappers/UserMapper";
 
 export const useUserStore = defineStore('user', () => {
-    const user = ref({} as UserDto)
-    const isUserSet = ref(false)
-    const isLoading = ref(false)
-    const showError = ref(false)
-    const errorMessage = ref("")
+    const user = ref<UserDto>()
+    const isUserSet = ref<boolean>()
+    const isLoading = ref<boolean>()
+    const showError = ref<boolean>()
+    const errorMessage = ref<string>()
 
-    const userMapper = new UserMapper();
     const githubService = new GithubService();
 
     const UserNotFoundMessage = "User not found";
     const ApiRateLimitExcededMessage = "API rate limit exceeded";
+    const ErrorTimeout = 3000;
 
     function $setError () {
         showError.value = true;
-        setTimeout(() => showError.value = false, 3000)
+        setTimeout(() => showError.value = false, ErrorTimeout)
     }
 
     function $resetError () {
@@ -31,7 +31,7 @@ export const useUserStore = defineStore('user', () => {
 
         githubService.getUser(username)
             .then((data) => {
-                user.value = userMapper.toDto(data);
+                user.value = UserMapper.toDto(data);
 
                 $resetError();
                 isLoading.value = false;

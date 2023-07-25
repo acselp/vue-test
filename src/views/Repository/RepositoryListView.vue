@@ -4,9 +4,13 @@ import Repository from "@/components/Repository.vue";
 import {useRepositoryStore} from "@/stores/RepositoryStore";
 import ReposSkeleton from "@/components/ReposSkeleton.vue";
 import {useUserStore} from "@/stores/UserStore";
+import {useRoute} from "vue-router";
 
 const repositoryStore = useRepositoryStore();
 const userStore = useUserStore();
+const route = useRoute();
+
+const { isReposSet, repo, repoList, isLoading } = repositoryStore.$state;
 
 repositoryStore.$setRepos(userStore.$state.user.username);
 
@@ -17,11 +21,11 @@ repositoryStore.$setRepos(userStore.$state.user.username);
     <div class="repositories-container">
       <div class="repos">
         <router-link class="is-info button" to="/"> <i class="fa-solid fa-arrow-left">&nbsp;</i> Back to home </router-link>
-        <Repository v-if="repositoryStore.$state.isReposSet" v-for="repo in repositoryStore.$state.repos" :link="repo.link" :name="repo.name" :stars="repo.starsCount" />
+        <Repository v-if="isReposSet" v-for="repo in repoList" :link="repo.link" :name="repo.name" :stars="repo.starsCount" />
 
-        <ReposSkeleton v-if="repositoryStore.$state.isLoading && !repositoryStore.$state.isReposSet" />
+        <ReposSkeleton v-if="isLoading && !isReposSet" />
 
-        <article class="message is-dark mt-3" v-if="!repositoryStore.$state.isReposSet && !repositoryStore.$state.isLoading">
+        <article class="message is-dark mt-3" v-if="!isReposSet && !isLoading">
           <div class="message-header">
             <p>Ooopsi...</p>
           </div>

@@ -1,6 +1,6 @@
 <script setup>
 
-const props = defineProps({
+defineProps({
   user: {}
 })
 
@@ -17,7 +17,7 @@ const props = defineProps({
         </figure>
         <div class="user-card card card-content has-background-grey-darker">
           <div class="is-flex is-flex-direction-column">
-            <span>Bio: {{bio}}</span>
+            <span>Bio: {{user.bio}}</span>
             <span>Followers: {{user.followersCount}}</span>
           </div>
           <div>

@@ -1,17 +1,17 @@
 import { defineStore } from 'pinia'
-import { ref} from "vue";
+import { ref } from "vue";
 import {GithubService} from "@/shared/services/GithubService";
 import type {RepositoryDto} from "@/shared/dto/RepositoryDto";
 import {RepositoryMapper} from "@/shared/mappers/RepositoryMapper";
 
 export const useRepositoryStore = defineStore('repository', () => {
-    const repos = ref([] as RepositoryDto[]);
-    const repo = ref({} as RepositoryDto);
-    const isReposSet = ref(false);
-    const isLoading = ref(false);
-    const showError = ref(false)
+    const repoList = ref<RepositoryDto[]>();
+    const repo = ref<RepositoryDto>();
+    const isReposSet = ref<boolean>();
+    const isLoading = ref<boolean>();
+    const showError = ref<boolean>();
+
     const githubService = new GithubService();
-    const repositoryMapper = new RepositoryMapper();
 
     function $setError () {
         showError.value = true;
@@ -25,11 +25,11 @@ export const useRepositoryStore = defineStore('repository', () => {
         isLoading.value = true;
         githubService.getRepositoriesByUsername(username)
             .then((data) => {
-                repos.value = repositoryMapper.toDtos(data);
+                repoList.value = RepositoryMapper.toDtoList(data);
 
                 $resetError();
                 isLoading.value = false;
-                isReposSet.value = repos.value.length !== 0;
+                isReposSet.value = repoList.value.length !== 0;
             })
             .catch((error) => {
                 $resetRepos();
@@ -41,7 +41,7 @@ export const useRepositoryStore = defineStore('repository', () => {
         isLoading.value = true;
         githubService.getRepositoryByName(username, repoName)
             .then((data) => {
-                repo.value = repositoryMapper.toDto(data);
+                repo.value = RepositoryMapper.toDto(data);
 
                 $resetError();
                 isLoading.value = false;
@@ -56,8 +56,8 @@ export const useRepositoryStore = defineStore('repository', () => {
     function $resetRepos() {
         isLoading.value = false;
         isReposSet.value = false;
-        repos.value = [];
+        repoList.value = [];
     }
 
-    return { repos, $setRepos, isReposSet, isLoading, $resetRepos, $setRepo };
+    return { repoList, $setRepos, isReposSet, isLoading, $resetRepos, repo };
 })

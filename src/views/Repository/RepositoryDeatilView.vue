@@ -2,18 +2,19 @@
 
 import {onMounted, ref} from "vue";
 import {useRoute} from "vue-router";
-import {useRepositoryStore} from "@/stores/RepositoryStore";
 import type {RepositoryDto} from "@/shared/dto/RepositoryDto";
+import {useRepositoryStore} from "@/stores/RepositoryStore";
 
 const route = useRoute();
 
-const repository = ref({} as RepositoryDto);
-const username = route.params.username as string;
-const repositoryName = route.params.repoName as string;
-
+const repository = ref<RepositoryDto>();
 const repositoryStore = useRepositoryStore();
 
+const {username, repositoryName} = route.params;
 
+onMounted(() => {
+  repository = repositoryStore.repo;
+})
 
 </script>
 
@@ -47,7 +48,7 @@ const repositoryStore = useRepositoryStore();
         </div>
 
         <div class="card-content">
-          <span>Stars: {{repository.starsCount}} &nbsp; </span><i class="fa-regular fa-star" style="color: #fff700;"></i>
+          <span>Stars: &nbsp; </span><i class="fa-regular fa-star" style="color: #fff700;"></i>
         </div>
       </div>
     </div>

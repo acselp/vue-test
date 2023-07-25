@@ -1,30 +1,27 @@
-import axios from 'axios'
 import type {UserModel} from "@/shared/models/UserModel";
 import type {RepositoryModel} from "@/shared/models/RepositoryModel";
+import {Axios} from "@/shared/api/Axios";
 
 export class GithubService {
-    axiosClient = axios.create({
-        baseURL: 'https://api.github.com/'
-    })
+    private readonly axiosClient = Axios.CreateAxios();
+    private readonly apiUrlGetUser = "users";
+    apiUrlGetRepos = (username: string) =>  `users/${username}/repos`;
 
-    usernamePlaceholder = "{username_placeholder}";
-    apiUrlGetUser = "users";
-    apiUrlGetRepos = `users/${this.usernamePlaceholder}/repos`;
+    async getUser(username: string): Promise<UserModel> {
+        const { data } = await this.axiosClient.get<UserModel>(`${this.apiUrlGetUser}/${username}`);
 
-    async getUser(username: string) {
-        const { data } = await this.axiosClient.get(`${this.apiUrlGetUser}/${username}`);
-
-        return data as UserModel
+        return data
     }
 
-    async getRepositoriesByUsername(username: string) {
-        const { data } = await this.axiosClient.get(this.apiUrlGetRepos.replace(this.usernamePlaceholder, username));
+    async getRepositoriesByUsername(username: string): Promise<RepositoryModel[]> {
+        const { data } = await this.axiosClient.get(this.apiUrlGetRepos(username));
 
-        return data as RepositoryModel[]
+        return data
     }
-    async getRepositoryByName(username: string, repositoryName: string) {
+
+    async getRepositoryByName(username: string, repositoryName: string): Promise<RepositoryModel> {
         const { data } = await this.axiosClient.get(`${this.apiUrlGetUser}/${username}/${repositoryName}`);
 
-        return data as RepositoryModel
+        return data
     }
 }

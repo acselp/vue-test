@@ -1,11 +1,6 @@
 <script setup>
 
-import {onMounted, ref} from "vue";
-
-
-const user = ref({});
-
-const props = defineProps({
+defineProps({
   name: String,
   link: String,
   stars: String,
@@ -24,7 +19,7 @@ const props = defineProps({
       Stars: {{stars}}
     </div>
     <div class="repo-name">
-      Link: <a :href="link">{{name}}</a>
+      Link: <router-link to="/repos/owner/name">{{name}}</router-link>
     </div>
   </div>
 
